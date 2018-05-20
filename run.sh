@@ -38,9 +38,14 @@ input="./image_input/face.jpg"
 style="./styles/seated-nude.jpg"
 
 mkdir -p ./image_output
+mkdir -p ../other_image_input
+mkdir -p ../other_styles
 time docker run -ti \
        -v "$XSOCK":"$XSOCK" -e DISPLAY="$DISPLAY" \
        -v "$XAUTH":"$XAUTH" -e XAUTHORITY="$XAUTH" \
        -v "$(readlink -f ./image_output):/neutral-style-tf/image_output" \
+       -v "$(readlink -f ../other_image_input):/other_image_input" \
+       -v "$(readlink -f ../other_styles):/other_styles" \
        --name=nstf \
-       nstf ${1:-bash stylize_image.sh $input $style}
+       nstf \
+       bash stylize_image.sh $input $style
