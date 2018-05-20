@@ -1,6 +1,6 @@
 {pkgs ? import <nixpkgs> {}}:
 with pkgs;
-python35Packages.buildPythonApplication {
+python36Packages.buildPythonApplication {
   name = "cysmith-neural-style-tf";
   buildInputs = [
     cudatoolkit
@@ -22,7 +22,7 @@ python35Packages.buildPythonApplication {
     unset SOURCE_DATE_EPOCH
     export PIP_PREFIX="$(pwd)/pip_packages"
     python_path=(
-      "$PIP_PREFIX/lib/python3.5/site-packages"
+      "$PIP_PREFIX/lib/python3.6/site-packages"
       "$PYTHONPATH"
     )
     # use double single quotes to escape bash quoting
