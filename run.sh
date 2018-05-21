@@ -47,7 +47,7 @@ _update="apt-get update"
 _install="apt-get install -y --no-install-recommends"
 _cleanup="eval apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*"
 _purge="apt-get purge -y --auto-remove"
-docker build -t nstf --rm=true --force-rm=true -f - . <<EOF
+cat <<EOF > Dockerfile
 FROM tensorflow/tensorflow:latest
 MAINTAINER oss@maximilian-huber.de
 RUN $_update \
@@ -58,6 +58,8 @@ WORKDIR /neutral-style-tf
 VOLUME /neutral-style-tf/image_output
 RUN chmod +x /neutral-style-tf/entrypoint.sh
 EOF
+
+docker build -t nstf --rm=true --force-rm=true .
 
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
